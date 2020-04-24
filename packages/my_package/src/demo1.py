@@ -28,7 +28,7 @@ class MyNode(DTROS):
         msg.header.stamp = rospy.get_rostime()
         msg.vel_left = -0.3
         msg.vel_right = 0.3
-        rospy.sleep(1)
+        rospy.sleep(time)
         self.pub.publish(msg)
 
         rospy.sleep();
