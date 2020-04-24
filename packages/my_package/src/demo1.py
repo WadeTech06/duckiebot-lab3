@@ -15,13 +15,37 @@ class MyNode(DTROS):
                                   WheelsCmdStamped,
                                   queue_size=1)
 
-    def run(self):
+    def drive(self, speed):
         msg = WheelsCmdStamped()
         msg.header.stamp = rospy.get_rostime()
-        msg.vel_left = 0.1
-        msg.vel_right = 0.1
+        msg.vel_left = speed
+        msg.vel_right = speed
         rospy.sleep(1)
         self.pub.publish(msg)
+    
+    def turn(self, time):
+        msg = WheelsCmdStamped()
+        msg.header.stamp = rospy.get_rostime()
+        msg.vel_left = -0.3
+        msg.vel_right = 0.3
+        rospy.sleep(1)
+        self.pub.publish(msg)
+
+        rospy.sleep();
+
+        msg.header.stamp = rospy.get_rostime()
+        msg.vel_left = 0
+        msg.vel_right = 0
+        rospy.sleep(1)
+        self.pub.publish(msg)
+
+    def run(self):
+        drive(0.5)
+        rospy.sleep(10)
+        turn(5)
+        drive(0.5)
+        rospy.sleep(10)
+        drive(0);
 
 
 if __name__ == '__main__':
